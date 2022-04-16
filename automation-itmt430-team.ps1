@@ -91,4 +91,5 @@ Get-Content id_ed25519_git_key.pub
 
 Write-Output "`n^^^^^ Copy the SSH Key to your GitHub account ^^^^"
 Write-Output "and paste the key in the GitHub account"
+Write-Output "Make sure to input the key or this sript will not work"
 cmd /c pause
