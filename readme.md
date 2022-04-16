@@ -7,3 +7,4 @@ Just run this command using administrator privileges
 ``` bash
 powershell -ExecutionPolicy Bypass -File automation-windows.ps1
 ```
+or use automation-windows.exe file using administrator privileges
