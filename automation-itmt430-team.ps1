@@ -9,6 +9,9 @@ Write-Output "=======================`n"
 
 $name = Read-Host "What name the do you want to input for github config? "
 $email = Read-Host "What is your email for GitHub Config? "
+$repo_name = Read-Host "What is your HAWK ID? "
+$group_name = Read-Host "What is your group repo name? "
+$group_num = Read-Host "What is your group number? "
 
 # Chocolately Installations
 $testchoco = powershell.exe choco -v
@@ -33,11 +36,12 @@ Write-Host "Finished installing package using Chocolatey"
 <# Show the SSH Version #>
 Write-Host "`nChecking SSH version:"
 $ssh = ssh.exe -V
-Write-Output $ssh
+Write-Output $ssh -ForegroundColor Green
 
 <# Show the git version #>
 Write-Host "`nChecking git version:"
-git.exe --version
+$git_version = git.exe --version
+Write-Host $git_version -ForegroundColor Green
 
 <# Configuring Git Client #>
 Write-Host "`n======================="
@@ -53,23 +57,27 @@ Write-Host "`n==========================="
 Write-Host "Showing the git config list"
 Write-Host "===========================`n"
 Write-Output "Github user.name:"
-git.exe config user.name
+$git_username = git.exe config user.name
+Write-Host $git_username -ForegroundColor Green
 Write-Output "Github user.email:"
-git.exe config user.email
+$git_email = git.exe config user.email
+Write-Host $git_email -ForegroundColor Green
 
 <# Showing Vagrant version#>
 Write-Host "`n========================"
 Write-Host "Checking Vagrant Version"
 Write-Host "========================`n"
 Write-Host "Vagrant Version:"
-vagrant.exe --version
+$vagrant_ver = vagrant.exe --version
+Write-Host $vagrant_ver -ForegroundColor Green
 
 <# Showing Packer version #>
 Write-Host "`n======================="
 Write-Host "Checking Packer Version"
 Write-Host "=======================`n"
-Write-Host "Vagrant Version:"
-packer.exe --version
+Write-Host "Packer Version:"
+$packer_ver = packer.exe --version
+Write-Host $packer_ver -ForegroundColor Green
 
 # Creating ssh-key
 Write-Host "`n======================="
@@ -77,19 +85,76 @@ Write-Host "Creating SSH Key"
 Write-Host "=======================`n"
 $exist = Test-Path -Path .\id_ed25519_git_key
 if(-not($exist)) {
-    Write-Output "SSH Key does not exist, creating it"
+    Write-Host "SSH Key does not exist, creating it" -ForegroundColor Red
     ssh-keygen -t ed25519 -f id_ed25519_git_key -N '""'
 }
 else {
-    Write-Output "SSH Key already exists"
+    Write-Host "SSH Key already exists" -ForegroundColor Green
 }
 
+# Showing the SSH Key
 Write-Output "`n======================="
 Write-Output "Showing the SSH Key"
 Write-Output "=======================`n"
-Get-Content id_ed25519_git_key.pub
+$ssh_key = Get-Content id_ed25519_git_key.pub
+Write-Host $ssh_key -ForegroundColor Green
 
 Write-Output "`n^^^^^ Copy the SSH Key to your GitHub account ^^^^"
 Write-Output "and paste the key in the GitHub account"
 Write-Output "Make sure to input the key or this sript will not work"
 cmd /c pause
+
+# Cloning the github repo
+Write-Output "`n=============================="
+Write-Output "Cloning the jhajek github repo"
+Write-Output "=============================="
+$jhajek_exist = Test-Path -Path ..\jhajek
+if(-not($jhajek_exist)) {
+    Write-Host "jhajek repo does not exist, cloning it" -ForegroundColor Red
+    git.exe clone git@github.com:illinoistech-itm/jhajek.git
+}
+else {
+    Write-Host "jhajek repo already exists" -ForegroundColor Green
+}
+
+Write-Output "`n================================"
+Write-Output "Cloning the personal github repo"
+Write-Output "================================"
+$personal_exist = Test-Path -Path ..\$repo_name
+if(-not($personal_exist)) {
+    Write-Host "$repo_name repo does not exist, cloning it" -ForegroundColor Red
+    git.exe clone git@github.com:illinoistech-itm/$repo_name.git
+}
+else {
+    Write-Host "$repo_name repo already exists" -ForegroundColor Green
+}
+
+Write-Output "`n============================="
+Write-Output "Cloning the Group github repo"
+Write-Output "============================="
+$group_exist = Test-Path -Path ..\$group_name
+if(-not($group_exist)) {
+    Write-Host "$group_name repo does not exist, cloning it" -ForegroundColor Red
+    git.exe clone git@github.com:illinoistech-itm/$group_name.git
+}
+else {
+    Write-Host "$group_name repo already exists" -ForegroundColor Green
+}
+
+# Retrieving the boxes
+Write-Output "Make sure to connect to the VPN that professor Hajek provided before pressing ENTER: "
+cmd /c pause
+
+Write-Output "`n===================="
+Write-Output "Retrieving the boxes"
+Write-Output "===================="
+Set-Location ../$group_name/build/powershell
+powershell.exe ./remove-and-retrieve-and-add-vagrant-boxes.ps1 $group_num
+
+Write-Host "Boxes is retreieved" -ForegroundColor Green
+
+Write-Output "`n===================="
+Write-Output "Bringing the boxes up"
+Write-Output "===================="
+Set-Location ../$group_name/build/powershell
+powershell.exe ./up.ps1
