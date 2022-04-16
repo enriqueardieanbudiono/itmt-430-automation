@@ -23,7 +23,7 @@ if(-not($testchoco)) {
     Set-ExecutionPolicy Bypass -Scope Process -Force; 
     [System.Net.ServicePointManager]::SecurityProtocol = 
     [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; 
-    iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
+    Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
 }
 else {
     Write-Output "Chocolately is already installed"
@@ -42,7 +42,7 @@ Write-Output $ssh
 
 <# Show the git version #>
 Write-Host "`nChecking git version:"
-Write-Output git.exe --version
+git.exe --version
 
 <# Configuring Git Client #>
 Write-Host "`n======================="
