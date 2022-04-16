@@ -5,5 +5,5 @@ This automation created using powershell can be use to finishing the tooling ass
 
 Just run this command using administrator privileges
 ``` bash
-powershell -ExecutionPolicy Bypass -File automation.ps1
+powershell -ExecutionPolicy Bypass -File automation-windows.ps1
 ```
