@@ -102,7 +102,7 @@ Write-Host $ssh_key -ForegroundColor Green
 
 Write-Output "`n^^^^^ Copy the SSH Key to your GitHub account ^^^^"
 Write-Output "and paste the key in the GitHub account"
-Write-Output "Make sure to input the key or this sript will not work"
+Write-Output "before pressing ENTER , make sure to input the key or this sript will not work"
 cmd /c pause
 
 # Cloning the github repo
