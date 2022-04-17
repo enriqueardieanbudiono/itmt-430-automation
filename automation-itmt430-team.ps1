@@ -157,5 +157,4 @@ Write-Host "Boxes is retreieved" -ForegroundColor Green
 Write-Output "`n===================="
 Write-Output "Bringing the boxes up"
 Write-Output "===================="
-Set-Location ../$group_name/build/powershell
 powershell.exe ./up.ps1
