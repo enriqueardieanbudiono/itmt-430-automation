@@ -37,7 +37,7 @@ Write-Host "Finished installing package using Chocolatey"
 <# Show the SSH Version #>
 Write-Host "`nChecking SSH version:"
 $ssh = ssh.exe -V
-Write-Output $ssh -ForegroundColor Green
+Write-Host $ssh -ForegroundColor Green
 
 <# Show the git version #>
 Write-Host "`nChecking git version:"
