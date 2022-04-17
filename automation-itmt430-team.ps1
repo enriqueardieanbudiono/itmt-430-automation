@@ -6,12 +6,13 @@ Description: This automation is created for itmt-430 student when installing too
 Write-Output "======================="
 Write-Output "Starting the automation"
 Write-Output "=======================`n"
+Write-Output "The Bracket only for example"
 
-$name = Read-Host "What name the do you want to input for github config? "
-$email = Read-Host "What is your email for GitHub Config? "
-$repo_name = Read-Host "What is your HAWK ID? "
-$group_name = Read-Host "What is your group repo name? "
-$group_num = Read-Host "What is your group number? "
+$name = Read-Host "What name the do you want to input for github config? (John Doe) "
+$email = Read-Host "What is your email for GitHub Config? (email@example.com) "
+$repo_name = Read-Host "What is your HAWK ID? (test)"
+$group_name = Read-Host "What is your group repo name? (2022-team00w) "
+$group_num = Read-Host "What is your group number? (00) "
 
 # Chocolately Installations
 $testchoco = powershell.exe choco -v
