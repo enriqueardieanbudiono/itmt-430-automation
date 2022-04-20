@@ -10,7 +10,7 @@ Write-Output "The Bracket only for example"
 
 $name = Read-Host "What name the do you want to input for github config? (John Doe) "
 $email = Read-Host "What is your email for GitHub Config? (email@example.com) "
-$repo_name = Read-Host "What is your HAWK ID? (test)"
+$repo_name = Read-Host "What is your HAWK username? (test)"
 $group_name = Read-Host "What is your group repo name? (2022-team00w) "
 $group_num = Read-Host "What is your group number? (00) "
 
