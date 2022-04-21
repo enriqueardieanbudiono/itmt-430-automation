@@ -1,10 +1,5 @@
 # ITMT - 430 & ITMO 453
+
 # Jeremy Hajek Class IIT
 
-This automation created using powershell can be use to finishing the tooling assignment or Assignment 1
-
-Just run this command using administrator privileges
-``` bash
-powershell -ExecutionPolicy Bypass -File automation-windows.ps1
-```
-or use [automation-windows.exe](https://github.com/enriqueardieanbudiono/itmt-430-automation/raw/main/automation-windows.exe) file using administrator privileges
+The automation in this repo is dedicated for ITMT-430 & ITMO 453 classess on IIT. The automation can be used if the user has an admin privileges on their computer and able to install the module that needed for this class. If you decided to use this automation for your project, please give the author the credit for creating this automation.
